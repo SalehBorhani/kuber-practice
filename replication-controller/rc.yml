@@ -1,0 +1,19 @@
+apiVersion: v1 
+kind: ReplicationController 
+metadata: 
+  name: web 
+spec: 
+  replicas: 3
+  selector: 
+    app: web
+  template: 
+    metadata: 
+      labels: 
+        app: web
+        type: special
+    spec: 
+      containers: 
+      - name: web 
+        image: salehborhani/web 
+        ports: 
+        - containerPort: 8080
