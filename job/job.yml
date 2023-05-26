@@ -9,7 +9,7 @@ spec:
       labels:
         app: batch-job
     spec:
-      restartPolicy: OnFailure
+      restartPolicy: Never
       containers:
       - name: main
         image: luksa/batch-job
