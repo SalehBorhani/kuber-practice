@@ -10,10 +10,14 @@ spec:
     metadata: 
       labels: 
         app: web
-        type: special
     spec: 
       containers: 
       - name: web 
         image: salehborhani/web 
+        readinessProbe:
+          exec:
+            command:
+            - ls
+            - /var/ready
         ports: 
         - containerPort: 8080
