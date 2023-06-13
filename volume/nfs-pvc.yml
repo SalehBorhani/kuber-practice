@@ -8,4 +8,4 @@ spec:
       storage: 250Mi
   accessModes:
   - ReadWriteOnce
-  storageClassName: ""
+  storageClassName: mine
