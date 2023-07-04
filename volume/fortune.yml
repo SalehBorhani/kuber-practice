@@ -6,7 +6,10 @@ metadata:
     app: volume
 spec:
   containers:
-  - image: luksa/fortune
+  - image: salehborhani/fortune:env
+    env:
+    - name: INTERVAL
+      value: "10"
     name: html-generator
     volumeMounts: 
     - name: html
