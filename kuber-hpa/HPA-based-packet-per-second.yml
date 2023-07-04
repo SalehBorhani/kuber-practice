@@ -1,73 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: php-apache
+  name: sample-app
+  labels:
+    app: sample-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      run: php-apache
+      app: sample-app
   template:
     metadata:
       labels:
-        run: php-apache
+        app: sample-app
     spec:
       containers:
-      - image: registry.k8s.io/hpa-example
-        name: php-apache
+      - image: luxas/autoscale-demo:v0.1.2
+        name: metrics-provider
         ports:
-        - containerPort: 80
-        
-
+        - name: http
+          containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: php-apache
+  labels:
+    app: sample-app
+  name: sample-app
 spec:
+  type: NodePort
   ports:
-  - port: 80
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30030
   selector:
-    run: php-apache
-
----    
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: main-route
-spec:
-  rules:
-  - host: k8s.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: php-apache
-            port:
-              number: 80       
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: php-apache
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: php-apache
-  minReplicas: 1
-  maxReplicas: 10
-  metrics:
-  - type: Object
-    object:
-      metric:
-        name: requests-per-second
-      describedObject:
-        apiVersion: networking.k8s.io/v1
-        kind: Ingress
-        name: main-route
-      target:
-        type: Value
-        value: 10k
+    app: sample-app
