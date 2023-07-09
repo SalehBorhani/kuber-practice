@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-no-conflict-with-limitrange-cpu
+spec:
+  containers:
+  - name: demo
+    image: docker.iranrepo.ir/nginx:latest
+    resources:
+      requests:
+        cpu: 700m
+      limits:
+        cpu: 700m
