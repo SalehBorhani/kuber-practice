@@ -8,13 +8,13 @@ spec:
     image: docker.iranrepo.ir/nginx
     resources:
       requests:
-        cpu: 700m
+        cpu: 600m
       limits:
         cpu: 700m
   - name: demor
     image: docker.iranrepo.ir/redis
     resources:
       requests:
-        cpu: 1400m
+        cpu: 400m
       limits:
-        cpu: 1500m
+        cpu: 500m
