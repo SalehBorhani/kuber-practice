@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-index-html-configmap
+  namespace: default
+data:
+  index.html: |
+    <html>
+      <head>
+        <title>Welcome to nginx!</title>
+      </head>
+      <body>
+        <h1>Hi! I got deployed in {{ .Values.env.name }} Enviroment using Helm Chart </h1>
+      </body>
+    </html>
