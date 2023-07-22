@@ -6,15 +6,8 @@ spec:
   containers:
   - name: demo
     image: docker.iranrepo.ir/nginx
-    resources:
-      requests:
-        cpu: 600m
-      limits:
-        cpu: 700m
+      
   - name: demor
     image: docker.iranrepo.ir/redis
-    resources:
-      requests:
-        cpu: 400m
-      limits:
-        cpu: 500m
+    
+      
